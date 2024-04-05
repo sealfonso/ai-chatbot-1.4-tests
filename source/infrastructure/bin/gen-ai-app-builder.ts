@@ -31,8 +31,9 @@ const solutionName = process.env.SOLUTION_NAME ?? app.node.tryGetContext('soluti
 const applicationType = app.node.tryGetContext('application_type');
 const applicationName = app.node.tryGetContext('app_registry_name');
 const applicationTrademarkName = app.node.tryGetContext('application_trademark_name');
-
-const stackList: (typeof BaseStack)[] = [HuggingFaceChat, AnthropicChat, BedrockChat, SageMakerChat];
+// TODO: Disabling other model providers
+// const stackList: (typeof BaseStack)[] = [HuggingFaceChat, AnthropicChat, BedrockChat, SageMakerChat];
+const stackList: (typeof BaseStack)[] = [BedrockChat];
 
 for (const stack of stackList) {
     createStack(stack, undefined, true);
