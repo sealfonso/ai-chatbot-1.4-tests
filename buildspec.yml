@@ -36,17 +36,17 @@ phases:
       - chmod +x ./build-s3-dist.sh
       # - export ASSETS_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export ASSETS_BUCKET_PREFIX="cdk-hnb659fds-assets-149426319854"
-      - export DIST-OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
+      - export DIST_OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
-      - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $DIST-OUTPUT_BUCKET
+      - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $DIST_OUTPUT_BUCKET
       - ls -la $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/
       - ls -la $CODEBUILD_SRC_DIR/source/ui-deployment/
       - ls -la $CODEBUILD_SRC_DIR/source/ui-chat/
       - ls -la $CODEBUILD_SRC_DIR/deployment/global-s3-assets/
       - ls -la $CODEBUILD_SRC_DIR/deployment/regional-s3-assets/
-      - aws s3 cp ./global-s3-assets/ s3://$DIST-OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./regional-s3-assets/ s3://$DIST-OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./regional-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
 #      - cdk synth   # Add --quiet to suppress template to standard output
 #      - pwd # TODO: remove after testing
 #      - aws s3 cp ./cdk.out/ s3://cdk-hnb659fds-assets-149426319854-us-east-1/ --recursive --acl bucket-owner-full-control
