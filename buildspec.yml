@@ -1,0 +1,67 @@
+version: 0.2
+#env:
+#  #  shell: bash
+#  variables:
+#    PROJECT_NAME: "generative-ai-application-builder-on-aws" # TODO: also located in the cdk.json
+#    PROJECT_VERSION: "v1.3.2"
+#  parameter-store:
+#    SOURCE_BUCKET_BASE_NAME: "/ci_cd_pipeline/source_bucket_base_name"    # TODO: use ${Environment}
+#    TEMPLATE_BUCKET_NAME: "/ci_cd_pipeline/template_bucket_name"    # TODO: use ${Environment}
+phases:
+  install:
+    commands:
+      - echo $CODEBUILD_SRC_DIR
+      - aws --version
+      - npm i -g aws-cdk    # Install CDK
+      - cdk --version
+      - apt-get install zip   # Install zip
+      - zip --version
+#      - apt update
+      - apt install -y jq
+      - jq --version
+      - cd source/infrastructure  # Improve path
+      - npm install
+  #  pre_build:
+  #    commands:
+  #      - cd <rootDir>/source
+  #      - chmod +x ./run-all-tests.sh
+  #      - ./run-all-tests.sh
+  build:
+    commands:
+      - echo $Environment
+      - echo $BranchName
+      - npm run build
+      - cd $CODEBUILD_SRC_DIR/deployment
+      - pwd
+      - chmod +x ./build-s3-dist.sh
+      # - export ASSETS_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
+      - export ASSETS_BUCKET_PREFIX="cdk-hnb659fds-assets-149426319854"
+      - export DIST-OUTPUT_BUCKET = "cdk-hnb659fds-assets-149426319854-us-east-1"
+      - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
+      - export VERSION="v1.4.0"
+      - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $DIST-OUTPUT_BUCKET
+      - ls -la $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/
+      - ls -la $CODEBUILD_SRC_DIR/source/ui-deployment/
+      - ls -la $CODEBUILD_SRC_DIR/source/ui-chat/
+      - ls -la $CODEBUILD_SRC_DIR/deployment/global-s3-assets/
+      - ls -la $CODEBUILD_SRC_DIR/deployment/regional-s3-assets/
+      - aws s3 cp ./global-s3-assets/ s3://$DIST-OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./regional-s3-assets/ s3://$DIST-OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+#      - cdk synth   # Add --quiet to suppress template to standard output
+#      - pwd # TODO: remove after testing
+#      - aws s3 cp ./cdk.out/ s3://cdk-hnb659fds-assets-149426319854-us-east-1/ --recursive --acl bucket-owner-full-control
+#      - export DEBUG="true"
+#      - bash ./stage-assets.sh
+
+artifacts:
+  #  base-directory: src/
+  files:
+    - $CODEBUILD_SRC_DIR/deployment/*.template
+    - $CODEBUILD_SRC_DIR/deployment/global-s3-assets/*
+    - $CODEBUILD_SRC_DIR/deployment/regional-s3-assets/*
+    - $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/DeploymentPlatformStack.template.json
+    - $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/*
+    - $CODEBUILD_SRC_DIR/source/ui-deployment
+  discard-paths: yes
+#  name: template-export.yml
+#    - template-export.yml
