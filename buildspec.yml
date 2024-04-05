@@ -36,7 +36,7 @@ phases:
       - chmod +x ./build-s3-dist.sh
       # - export ASSETS_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export ASSETS_BUCKET_PREFIX="cdk-hnb659fds-assets-149426319854"
-      - export DIST-OUTPUT_BUCKET = "cdk-hnb659fds-assets-149426319854-us-east-1"
+      - export DIST-OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
       - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $DIST-OUTPUT_BUCKET
