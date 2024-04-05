@@ -39,7 +39,7 @@ phases:
       - export DIST_OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
-      - export CF_TEMPLATE_BUCKET_NAME ="gaab-templates"
+      - export CF_TEMPLATE_BUCKET_NAME="gaab-templates"
       - bash build-s3-dist.sh $DIST_OUTPUT_BUCKET $SOLUTION_NAME $VERSION $CF_TEMPLATE_BUCKET_NAME
       - ls -la $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/
       - ls -la $CODEBUILD_SRC_DIR/source/ui-deployment/
