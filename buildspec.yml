@@ -35,8 +35,8 @@ phases:
       - pwd
       - chmod +x ./build-s3-dist.sh
       # - export ASSETS_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
-      - export ASSETS_BUCKET_PREFIX="gaab-1-4"
-      - export DIST_OUTPUT_BUCKET="gaab-1-4-us-east-1"
+      - export ASSETS_BUCKET_PREFIX="cdk-hnb659fds-assets-149426319854"
+      - export DIST_OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
       - export CF_TEMPLATE_BUCKET_NAME="gaab-templates"
