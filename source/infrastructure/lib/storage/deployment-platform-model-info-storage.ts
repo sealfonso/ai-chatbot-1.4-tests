@@ -30,7 +30,7 @@ export class DeploymentPlatformModelInfoStorage extends ModelInfoStorage {
         this.newModelInfoTable = this.createModelInfoTable(props);
 
         const crLambdaRole = iam.Role.fromRoleArn(this, 'CopyModelInfoCustomResourceRole', props.customResourceRoleArn);
-
-        this.createCopyModelInfoCustomResource(props, this.newModelInfoTable, crLambdaRole);
+        // TODO: Comment CR of copy model info
+        // this.createCopyModelInfoCustomResource(props, this.newModelInfoTable, crLambdaRole);
     }
 }

@@ -67,26 +67,26 @@ export abstract class ModelInfoStorage extends Construct {
 
         return modelInfoTable;
     }
+    // TODO: Comment CR CopyModelInfo
+    // protected createCopyModelInfoCustomResource(
+    //     props: ModelInfoStorageProps,
+    //     modelInfoTable: dynamodb.Table,
+    //     crLambdaRole: iam.IRole
+    // ): cdk.CustomResource {
+    //     const modelInfoAsset = new s3_asset.Asset(this, 'Files', {
+    //         path: path.join(__dirname, '../../../model-info')
+    //     });
 
-    protected createCopyModelInfoCustomResource(
-        props: ModelInfoStorageProps,
-        modelInfoTable: dynamodb.Table,
-        crLambdaRole: iam.IRole
-    ): cdk.CustomResource {
-        const modelInfoAsset = new s3_asset.Asset(this, 'Files', {
-            path: path.join(__dirname, '../../../model-info')
-        });
+    //     const copyModelInfoCustomResource = new cdk.CustomResource(this, 'CopyModelInfo', {
+    //         resourceType: 'Custom::CopyModelInfo',
+    //         serviceToken: props.customResourceLambdaArn,
+    //         properties: {
+    //             ...getResourceProperties(this, modelInfoAsset, undefined, crLambdaRole),
+    //             Resource: 'COPY_MODEL_INFO',
+    //             DDB_TABLE_NAME: modelInfoTable.tableName
+    //         }
+    //     });
 
-        const copyModelInfoCustomResource = new cdk.CustomResource(this, 'CopyModelInfo', {
-            resourceType: 'Custom::CopyModelInfo',
-            serviceToken: props.customResourceLambdaArn,
-            properties: {
-                ...getResourceProperties(this, modelInfoAsset, undefined, crLambdaRole),
-                Resource: 'COPY_MODEL_INFO',
-                DDB_TABLE_NAME: modelInfoTable.tableName
-            }
-        });
-
-        return copyModelInfoCustomResource;
-    }
+    //     return copyModelInfoCustomResource;
+    // }
 }
