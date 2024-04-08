@@ -48,6 +48,8 @@ phases:
       - ls -la $CODEBUILD_SRC_DIR/deployment/regional-s3-assets/
       - aws s3 cp ./global-s3-assets/ s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
       - aws s3 cp ./regional-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./regional-s3-assets/ s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
 #      - cdk synth   # Add --quiet to suppress template to standard output
 #      - pwd # TODO: remove after testing
 #      - aws s3 cp ./cdk.out/ s3://cdk-hnb659fds-assets-149426319854-us-east-1/ --recursive --acl bucket-owner-full-control
