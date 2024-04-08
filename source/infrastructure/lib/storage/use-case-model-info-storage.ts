@@ -52,14 +52,14 @@ export class UseCaseModelInfoStorage extends ModelInfoStorage {
         (newModelInfoTable.node.defaultChild as cdk.CfnResource).cfnOptions.condition = createModelInfoTableCondition;
 
         const crLambdaRole = iam.Role.fromRoleArn(this, 'CopyModelInfoCustomResourceRole', props.customResourceRoleArn);
-
-        // const copyModelInfoCustomResource = this.createCopyModelInfoCustomResource(
-        //     props,
-        //     newModelInfoTable,
-        //     crLambdaRole
-        // );
-        // (copyModelInfoCustomResource.node.defaultChild as cdk.CfnResource).cfnOptions.condition =
-        //     createModelInfoTableCondition;
+        // TODO: Comment CR
+        const copyModelInfoCustomResource = this.createCopyModelInfoCustomResource(
+            props,
+            newModelInfoTable,
+            crLambdaRole
+        );
+        (copyModelInfoCustomResource.node.defaultChild as cdk.CfnResource).cfnOptions.condition =
+            createModelInfoTableCondition;
     }
 
     protected createModelInfoTable(props: UseCaseModelInfoStorageProps) {
