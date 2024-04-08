@@ -10,17 +10,17 @@ version: 0.2
 phases:
   install:
     commands:
-#       - echo $CODEBUILD_SRC_DIR
-#       - aws --version
-#       - npm i -g aws-cdk    # Install CDK
-#       - cdk --version
-#       - apt-get install zip   # Install zip
-#       - zip --version
-# #      - apt update
-#       - apt install -y jq
-#       - jq --version
-#       - cd source/infrastructure  # Improve path
-#       - npm install
+      - echo $CODEBUILD_SRC_DIR
+      - aws --version
+      - npm i -g aws-cdk    # Install CDK
+      - cdk --version
+      - apt-get install zip   # Install zip
+      - zip --version
+#      - apt update
+      - apt install -y jq
+      - jq --version
+      - cd source/infrastructure  # Improve path
+      - npm install
   #  pre_build:
   #    commands:
   #      - cd <rootDir>/source
