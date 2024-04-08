@@ -41,9 +41,9 @@ phases:
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
       - export CF_TEMPLATE_BUCKET_NAME="cdk-hnb659fds-assets-149426319854"
+      - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $CF_TEMPLATE_BUCKET_NAME
       - echo $TEMPLATE_FILE_EXTN_ENV_VAR
       - echo $ARTIFACT_KEY_PREFIC_ENV_VAR
-      # - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $CF_TEMPLATE_BUCKET_NAME
       # - ls -la $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/
       # - ls -la $CODEBUILD_SRC_DIR/source/ui-deployment/
       # - ls -la $CODEBUILD_SRC_DIR/source/ui-chat/
