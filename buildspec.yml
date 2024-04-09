@@ -35,12 +35,12 @@ phases:
       - pwd
       - chmod +x ./build-s3-dist.sh
       - export ASSETS_BUCKET_PREFIX="cdk-hnb659fds-assets-149426319854"
-      - export DIST_OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854-us-east-1"
-      - export DIST_OUTPUT_BUCKET_PLUS_REGION="cdk-hnb659fds-assets-149426319854-us-east-1-us-east-1"
+      - export DIST_OUTPUT_BUCKET="cdk-hnb659fds-assets-149426319854"
+      - export DIST_OUTPUT_BUCKET_PLUS_REGION="cdk-hnb659fds-assets-149426319854-us-east-1"
       - export SOLUTION_NAME="generative-ai-application-builder-on-aws"
       - export VERSION="v1.4.0"
-      - export CF_TEMPLATE_BUCKET_NAME="cdk-hnb659fds-assets-149426319854"
-      - bash build-s3-dist.sh $ASSETS_BUCKET_PREFIX $SOLUTION_NAME $VERSION $CF_TEMPLATE_BUCKET_NAME
+      - export CF_TEMPLATE_BUCKET_NAME="cdk-hnb659fds-assets-149426319854-us-east-1"
+      - bash build-s3-dist.sh $DIST_OUTPUT_BUCKET $SOLUTION_NAME $VERSION $CF_TEMPLATE_BUCKET_NAME
       - echo $TEMPLATE_FILE_EXTN_ENV_VAR
       - echo $ARTIFACT_KEY_PREFIC_ENV_VAR
       - ls -la $CODEBUILD_SRC_DIR/source/infrastructure/cdk.out/
@@ -49,13 +49,13 @@ phases:
       - ls -la $CODEBUILD_SRC_DIR/deployment/global-s3-assets/
       - ls -la $CODEBUILD_SRC_DIR/deployment/regional-s3-assets/
       - aws s3 cp ./global-s3-assets/ s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./regional-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./regional-s3-assets/ s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
       - aws s3 cp ./regional-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
-      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET/ --recursive --acl bucket-owner-full-control
-      - aws s3 mv s3://$DIST_OUTPUT_BUCKET/BedrockChat.template s3://$DIST_OUTPUT_BUCKET/BedrockChat.template.json --recursive --acl bucket-owner-full-control
+      # - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      # - aws s3 cp ./regional-s3-assets/ s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      # - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      # - aws s3 cp ./regional-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/generative-ai-application-builder-on-aws/$VERSION/ --recursive --acl bucket-owner-full-control
+      - aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/ --recursive --acl bucket-owner-full-control
+      - aws s3 mv s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/BedrockChat.template s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/BedrockChat.template.json --recursive --acl bucket-owner-full-control
 
 
 artifacts:
