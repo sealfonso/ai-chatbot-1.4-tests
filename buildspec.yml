@@ -59,7 +59,7 @@ phases:
       #- aws s3 cp ./global-s3-assets/ s3://$DIST_OUTPUT_BUCKET_PLUS_REGION/ --recursive --acl bucket-owner-full-control
       # - aws s3 cp s3://$CF_TEMPLATE_BUCKET_NAME/generative-ai-application-builder-on-aws/$VERSION  s3://$CF_TEMPLATE_BUCKET_NAME/ --recursive --acl bucket-owner-full-control
       # - aws s3 mv s3://$CF_TEMPLATE_BUCKET_NAME/BedrockChat.template s3://$CF_TEMPLATE_BUCKET_NAME/BedrockChat.template.json --recursive --acl bucket-owner-full-control
-      aws s3 mv s3://cdk-hnb659fds-assets-149426319854-us-east-1/BedrockChat.template s3://cdk-hnb659fds-assets-149426319854-us-east-1/BedrockChat.template.json --recursive --acl bucket-owner-full-control
+      aws s3 mv s3://cdk-hnb659fds-assets-149426319854-us-east-1/BedrockChat.template s3://cdk-hnb659fds-assets-149426319854-us-east-1/$VERSION/BedrockChat.template.json --recursive --acl bucket-owner-full-control
 
 artifacts:
   #  base-directory: src/
